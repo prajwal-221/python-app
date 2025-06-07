@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: https://github.com/prajwal-221/python-app.git
     targetRevision: HEAD
-    path: python-app/overlays/staging
+    path: manifests/overlays/staging
     plugin:
       name: ksops
   destination:
@@ -18,3 +18,5 @@ spec:
     automated:
       prune: true
       selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
