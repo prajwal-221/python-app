@@ -1,0 +1,7 @@
+namePrefix: staging-
+
+namespace: python-app
+
+resources:
+  - ../../base
+  - secret.sops.yaml
