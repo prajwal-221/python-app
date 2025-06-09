@@ -27,17 +27,16 @@ metadata:
   name: python-app-staging
   namespace: argocd
 spec:
-  destination:
-    namespace: python-app
-    server: https://kubernetes.default.svc
   project: default
   source:
     repoURL: https://github.com/prajwal-221/python-app.git
-    path: manifests/
-    targetRevision: main
-    directory:
-      recurse: true
-      include: staging.yaml
+    targetRevision: HEAD
+    path: manifests/overlays/staging
+    plugin:
+      name: kustomize-ksops
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: python-app
   syncPolicy:
     automated:
       prune: true
