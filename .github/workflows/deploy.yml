@@ -12,6 +12,9 @@ jobs:
     - name: Checkout repo
       uses: actions/checkout@v3
 
+    - name: Debug - List repo contents
+      run: ls -R
+
     - name: Set up Git identity
       run: |
         git config --global user.name "github-actions[bot]"
@@ -24,9 +27,8 @@ jobs:
 
     - name: Run build.sh to decrypt and build manifest
       run: |
-        cd manifests/overlays/staging
-        chmod +x build.sh
-        ./build.sh
+        chmod +x python-app/manifests/overlays/staging/build.sh
+        python-app/manifests/overlays/staging/build.sh
 
     - name: Commit and push generated manifest
       run: |
