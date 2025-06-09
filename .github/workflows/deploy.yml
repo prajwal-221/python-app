@@ -1,0 +1,35 @@
+name: Decrypt and Deploy to Argo CD
+
+on:
+  push:
+    branches: [ main ]  # Triggers when changes are pushed to main
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v3
+
+    - name: Set up Git identity
+      run: |
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+    - name: Set up AGE key for SOPS
+      run: |
+        mkdir -p ~/.config/sops/age
+        echo "${{ secrets.SOPS_AGE_KEY }}" > ~/.config/sops/age/keys.txt
+
+    - name: Run build.sh to decrypt and build manifest
+      run: |
+        cd python-app/manifests/overlays/staging
+        chmod +x build.sh
+        ./build.sh
+
+    - name: Commit and push generated manifest
+      run: |
+        git add python-app/manifests/staging.yaml
+        git commit -m "Auto-build manifest after push"
+        git push origin main
