@@ -4,4 +4,6 @@ namespace: python-app
 
 resources:
   - ../../base
-  - secret.sops.yaml
+
+generators:
+  - ksops.yaml
