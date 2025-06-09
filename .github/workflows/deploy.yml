@@ -2,7 +2,7 @@ name: Decrypt and Deploy to Argo CD
 
 on:
   push:
-    branches: [ main ]  # Triggers when changes are pushed to main
+    branches: [ main ]
 
 jobs:
   build-deploy:
@@ -24,7 +24,7 @@ jobs:
 
     - name: Run build.sh to decrypt and build manifest
       run: |
-        cd python-app/manifests/overlays/staging
+        cd manifests/overlays/staging
         chmod +x build.sh
         ./build.sh
 
