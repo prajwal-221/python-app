@@ -3,4 +3,4 @@ kind: ksops
 metadata:
   name: ksops-generator
 files:
-  - secret.enc.yaml
+  - secret.sops.yaml
