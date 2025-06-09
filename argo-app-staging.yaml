@@ -32,7 +32,8 @@ spec:
   project: default
   source:
     repoURL: https://github.com/prajwal-221/env-python-app.git
-    path: manifests
+    path: python-app/manifests/overlays/staging
+
     targetRevision: HEAD
     directory:
       recurse: true
