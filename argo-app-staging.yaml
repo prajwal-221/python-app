@@ -21,28 +21,27 @@
 #     syncOptions:
 #       - CreateNamespace=true
 
-
-
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: python-app-staging
   namespace: argocd
 spec:
+  destination:
+    namespace: python-app
+    server: https://kubernetes.default.svc
   project: default
   source:
     repoURL: https://github.com/prajwal-221/python-app.git
-    path: manifests/overlays/staging
-
-    targetRevision: HEAD
+    path: manifests/
+    targetRevision: main
     directory:
       recurse: true
-  destination:
-    server: https://kubernetes.default.svc
-    namespace: python-app
+      include: staging.yaml
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
+
