@@ -31,7 +31,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/prajwal-221/env-python-app.git
+    repoURL: https://github.com/prajwal-221/python-app.git
     path: python-app/manifests/overlays/staging
 
     targetRevision: HEAD
