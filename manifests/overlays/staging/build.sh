@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-# Set path to your SOPS age key
+# Set path to your SOPS age key (already configured in GitHub Actions)
 export SOPS_AGE_KEY_FILE="$HOME/.config/sops/age/keys.txt"
 
 # Decrypt the staging secret (if needed)
@@ -16,8 +16,8 @@ if [[ -f ../../base/secret.enc.yaml ]]; then
   sops -d ../../base/secret.enc.yaml > ../../base/secret.yaml
 fi
 
-# Build manifests using Kustomize
+# Build manifests using Kustomize from the current directory
 echo "📦 Building Kubernetes manifests with kustomize..."
-kustomize build . > ../../staging.yaml
+kustomize build . > ../../../staging.yaml
 
 echo "✅ Done! Output written to manifests/staging.yaml"
